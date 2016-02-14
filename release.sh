@@ -5,7 +5,7 @@
 
 # Recreate uit-thesis-install.exe
 
-TARGET="$HOME"/uit-thesis-install.exe
+TARGET="$(pwd -L)"/uit-thesis-install.exe
 TMPDIR=/tmp/ultinstaller-tmp
 OPTS7="-m0=lzma -mx=9 -md=64M"
 TMPPACK=/tmp.7z

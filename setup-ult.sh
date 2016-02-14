@@ -39,7 +39,7 @@ git config remote.origin.fetch \
 git config branch.master.remote origin &&
 git config branch.master.merge refs/heads/master &&
 
-git fetch || {
+git fetch --depth=1 || {
 		echo -n "Please enter a HTTP proxy: " &&
 		read proxy &&
 		test ! -z "$proxy" &&
@@ -57,6 +57,10 @@ echo Checking out the uit-thesis master branch
 echo -------------------------------------------------------
 git checkout -l -f -q -b master origin/master ||
 	error Couldn\'t checkout the master branch!
+
+git submodule sync
+git submodule init
+git submodule update --init --recursive
 
 echo
 echo
