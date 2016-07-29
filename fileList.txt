@@ -16,6 +16,7 @@ libexec/git-core/git-submodule
 libexec/git-core/git-remote-http.exe
 libexec/git-core/git-remote-https.exe
 bin/cat.exe
+bin/dirname.exe
 bin/expr.exe
 bin/mkdir.exe
 bin/sed.exe
@@ -26,3 +27,4 @@ bin/rm.exe
 bin/uname.exe
 bin/make.exe
 bin/perl.exe
+bin/msys-perl5_8.dll
