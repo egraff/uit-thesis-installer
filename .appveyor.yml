@@ -8,7 +8,7 @@ install:
   - C:\msys64\usr\bin\bash.exe --login -c "mkdir 7zsd_extra && 7z e 7zsd_extra_170_3900.7z -o7zsd_extra"
 
 build_script:
-  - C:\msys64\usr\bin\bash.exe --login .\release.sh
+  - C:\msys64\usr\bin\bash.exe --login -c "$APPVEYOR_BUILD_FOLDER$/release.sh"
 
 # https://www.appveyor.com/docs/how-to/rdp-to-build-worker/
 on_failure:
