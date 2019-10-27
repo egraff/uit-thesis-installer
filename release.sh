@@ -61,7 +61,7 @@ echo "Creating archive"
 
 cd ..
 /usr/bin/7za a $OPTS7 "$TMPPACK" ultinstaller-tmp
-(cat "$SHARE"/lol/7zSD.sfx &&
+(cat "$SHARE"/7zsd_extra/7zsd_All_x64.sfx &&
  echo ';!@Install@!UTF-8!' &&
  echo 'Title="UiT thesis LaTeX template installation"' &&
  echo 'GUIFlags="8+32+64+256+4096"' &&

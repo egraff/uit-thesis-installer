@@ -7,6 +7,9 @@ install:
   - C:\msys64\usr\bin\bash.exe --login -c "curl -L -o 7zsd_extra_170_3900.7z https://github.com/chrislake/7zsfxmm/releases/download/1.7.0.3900/7zsd_extra_170_3900.7z"
   - C:\msys64\usr\bin\bash.exe --login -c "mkdir 7zsd_extra && 7z e 7zsd_extra_170_3900.7z -o7zsd_extra"
 
+build_script:
+  - C:\msys64\usr\bin\bash.exe --login .\release.sh
+
 # https://www.appveyor.com/docs/how-to/rdp-to-build-worker/
 on_failure:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
