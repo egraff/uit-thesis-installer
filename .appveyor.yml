@@ -14,6 +14,11 @@ install:
 build_script:
   - C:\msys64\usr\bin\bash.exe --login -c "cd $APPVEYOR_BUILD_FOLDER && ./release.sh"
 
+artifacts:
+  - path: uit-thesis-install.exe
+    name: installer
+    type: file
+
 # https://www.appveyor.com/docs/how-to/rdp-to-build-worker/
 on_failure:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
