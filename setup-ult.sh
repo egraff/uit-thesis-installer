@@ -3,9 +3,8 @@
 # Note: this script is based on the setup script from msysGit
 # (/share/msysGit/net/setup-msysgit.sh)
 
-# We're already in the install directory
-INSTALL_PATH="$(pwd)"
-export PATH="$INSTALL_PATH/ultinstaller-tmp/bin:$PATH"
+ORIG_PATH=$PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/opt/bin:$PATH"
 
 error () {
     echo "* error: $*"
@@ -21,15 +20,7 @@ echo Fetching the latest UiT thesis LaTeX template revision
 echo -------------------------------------------------------
 ULT_REPO_HTTP=https://github.com/egraff/uit-thesis.git
 
-# Multiply git.exe
-
-for builtin in init unpack-objects update-ref fetch ls-remote clone checkout
-do
-	ln "$INSTALL_PATH/ultinstaller-tmp/bin/git.exe" \
-		"$INSTALL_PATH/ultinstaller-tmp/bin/git-$builtin.exe"
-done
-
-git config --system http.sslCAinfo /bin/curl-ca-bundle.crt
+git config --system http.sslCAinfo /usr/ssl/certs/ca-bundle.crt
 
 git init &&
 git config core.autocrlf true &&
@@ -74,5 +65,6 @@ echo
 echo -------------------------------------------------------
 echo Updating LaTeX database
 echo -------------------------------------------------------
-cmd.exe /c texhash
-
+export PATH=$ORIG_PATH
+# /c is substituted to c:\ by msys, so need to escape /c -> //c
+cmd.exe //c texhash
