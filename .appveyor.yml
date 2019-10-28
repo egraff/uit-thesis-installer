@@ -1,6 +1,10 @@
 clone_depth: 10
 
+cache:
+  - C:\msys64\var\cache\pacman
+
 install:
+  - C:\msys64\usr\bin\bash.exe --login -c "pacman -Syu"
   - C:\msys64\usr\bin\bash.exe --login -c "pacman -S --noconfirm git"
   - C:\msys64\usr\bin\bash.exe --login -c "pacman -S --noconfirm openssl"
   - C:\msys64\usr\bin\bash.exe --login -c "pacman -S --noconfirm p7zip"

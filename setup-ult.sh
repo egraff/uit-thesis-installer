@@ -3,6 +3,7 @@
 # Note: this script is based on the setup script from msysGit
 # (/share/msysGit/net/setup-msysgit.sh)
 
+ORIG_PATH=$PATH
 export PATH="/usr/local/bin:/usr/bin:/bin:/opt/bin:$PATH"
 
 error () {
@@ -64,4 +65,6 @@ echo
 echo -------------------------------------------------------
 echo Updating LaTeX database
 echo -------------------------------------------------------
-cmd.exe /c texhash
+export PATH=$ORIG_PATH
+# /c is substituted to c:\ by msys, so need to escape /c -> //c
+cmd.exe //c texhash
