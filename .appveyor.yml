@@ -9,10 +9,10 @@ install:
   - C:\msys64\usr\bin\bash.exe --login -c "pacman -S --noconfirm openssl"
   - C:\msys64\usr\bin\bash.exe --login -c "pacman -S --noconfirm p7zip"
   - C:\msys64\usr\bin\bash.exe --login -c "curl -L -o 7zsd_extra_170_3900.7z https://github.com/chrislake/7zsfxmm/releases/download/1.7.0.3900/7zsd_extra_170_3900.7z"
-  - C:\msys64\usr\bin\bash.exe --login -c "mkdir 7zsd_extra && 7z e 7zsd_extra_170_3900.7z -o7zsd_extra"
+  - C:\msys64\usr\bin\bash.exe --login -c "TARGET_DIR='$(cd $APPVEYOR_BUILD_FOLDER && pwd)' && mkdir $TARGET_DIR/7zsd_extra && 7z e 7zsd_extra_170_3900.7z -o$TARGET_DIR/7zsd_extra"
 
 build_script:
-  - C:\msys64\usr\bin\bash.exe --login -c "$APPVEYOR_BUILD_FOLDER/release.sh"
+  - C:\msys64\usr\bin\bash.exe --login -c "cd $APPVEYOR_BUILD_FOLDER && ./release.sh"
 
 # https://www.appveyor.com/docs/how-to/rdp-to-build-worker/
 on_failure:
