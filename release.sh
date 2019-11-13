@@ -7,7 +7,7 @@ set -e
 # Recreate uit-thesis-install.exe
 
 TARGET="$(pwd -L)"/uit-thesis-install.exe
-TMPDIR=/tmp/ultinstaller-tmp
+TMPDIR=/tmp/uit-thesis-installer-tmp
 OPTS7="-m0=lzma -mx=9 -md=64M"
 TMPPACK=/tmp.7z
 
@@ -23,6 +23,11 @@ cd "$TMPDIR"
 (cd .. && test ! -f "$TMPPACK" || rm "$TMPPACK")
 
 echo "Copying files"
+
+cp "$SHARE"/install.bat install.bat
+
+mkdir msys64
+pushd msys64
 
 sed 's/\r//g' "$SHARE"/fileList.txt |
 	(cd / && tar -c --file=- --files-from=-; echo $? > /tmp/exitstatus) |
@@ -57,17 +62,20 @@ fi
 
 cp "$SHARE"/setup-ult.sh setup-ult.sh
 
+# Pop msys64 dir, to get back to $TMPDIR
+popd
+
 echo "Creating archive"
 
 cd ..
-/usr/bin/7za a $OPTS7 "$TMPPACK" ultinstaller-tmp
+/usr/bin/7za a $OPTS7 "$TMPPACK" uit-thesis-installer-tmp
 (cat "$SHARE"/7zsd_extra/7zsd_All_x64.sfx &&
  echo ';!@Install@!UTF-8!' &&
  echo 'Title="UiT thesis LaTeX template installation"' &&
  echo 'GUIFlags="8+32+64+256+4096"' &&
  echo 'GUIMode="1"' &&
  echo 'OverwriteMode="2"' &&
- echo 'RunProgram="\"%%T\ultinstaller-tmp\usr\bin\sh.exe\" /setup-ult.sh"' &&
+ echo 'RunProgram="cmd /c \"%%T\uit-thesis-installer-tmp\install.bat\""' &&
  echo ';!@InstallEnd@!' &&
  cat "$TMPPACK") > "$TARGET"
 
