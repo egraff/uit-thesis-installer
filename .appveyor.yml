@@ -1,7 +1,7 @@
 clone_depth: 10
 
 # Needs this for most recent MSYS
-image: Visual Studio 2022
+image: Visual Studio 2109
 
 cache:
   - C:\msys64\var\cache\pacman
